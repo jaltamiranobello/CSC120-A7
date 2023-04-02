@@ -4,12 +4,14 @@ public class House extends Building {
 
   private ArrayList<String> residents;
   private boolean hasDiningRoom;
+  private boolean hasElevator;
 
   /* This is a constructor for the House class */
-  public House(String name, String address, int nFloors, boolean hasDiningRoom) {
+  public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = hasDiningRoom;
+    this.hasElevator= hasElevator;
   }
 
   /** Accessor for hasDiningRoom */
@@ -21,6 +23,11 @@ public class House extends Building {
   public int nResidents() {
     return this.residents.size();
   }
+
+    /** Accessor for hasElevator */
+    public boolean hasElevator() {
+      return this.hasElevator();
+    }
 
   /**
    * This moves in a person into a house if they do not already live there by adding them to an arraylist called residents
@@ -96,8 +103,25 @@ public class House extends Building {
     return description;
   }
 
+  public void showOptions() {
+    System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + moveIn()\n + moveOut()\n + isResident()\n");
+}
+
+public void goToFloor(int floorNum) {
+  try{
+    if (this.hasElevator == false){
+      throw new RuntimeException("Sorry, there is no elevator.");
+    }
+    super.goToFloor(floorNum);
+  }
+  catch(RuntimeException e){
+    System.out.println(e);
+  }
+  
+}
+
   public static void main(String[] args) {
-    House wilson = new House("Wilson", "16 Kensington Ave", 4, false);
+    House wilson = new House("Wilson", "16 Kensington Ave", 4, false, false);
     System.out.println(wilson);
     wilson.moveIn("Julie");
     wilson.moveIn("Julie");
@@ -105,10 +129,14 @@ public class House extends Building {
     wilson.moveOut("Julie");
     wilson.moveIn("Liz");
     System.out.println(wilson);
-    House scales = new House("Scales", "170 Elm Street", 4, true);
+    House scales = new House("Scales", "170 Elm Street", 4, true, true);
     scales.moveIn("Kimberly");
     scales.moveOut("Julie");
     System.out.println(scales);
+    wilson.enter();
+    wilson.goToFloor(2);
+    scales.enter();
+    scales.goToFloor(2);
   }
 
 }

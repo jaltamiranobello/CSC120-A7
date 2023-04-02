@@ -4,14 +4,16 @@ public class Cafe extends Building {
     private int nSugarPackets;
     private int nCreams; 
     private int nCups;
+    private boolean hasElevator;
 
     /* This is a constructor for the Cafe class */
-    public Cafe(String name, String address, int nFloors, int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups) {
+    public Cafe(String name, String address, int nFloors, int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups, boolean hasElevator) {
         super(name, address, nFloors);
         this.nCoffeeOunces = nCoffeeOunces;
         this.nSugarPackets = nSugarPackets;
         this.nCreams = nCreams;
         this.nCups = nCups;
+        this.hasElevator = hasElevator;
     }
 
     /** Accessor for nCoffeeOunces */
@@ -32,6 +34,11 @@ public class Cafe extends Building {
     /** Accessor for nCups */
     public int getnCups(){
         return this.nCups;
+    }
+
+    /** Accessor for hasElevator */
+    public boolean hasElevator() {
+        return this.hasElevator();
     }
     
   /**
@@ -80,8 +87,26 @@ public class Cafe extends Building {
         }
 
     }
+
+    public void showOptions() {
+        System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n)\n + sellCoffee()\n + restock() ");
+    }
+
+    public void goToFloor(int floorNum) {
+        try{
+          if (this.hasElevator == false){
+            throw new RuntimeException("Sorry, there is no elevator.");
+          }
+          super.goToFloor(floorNum);
+        }
+        catch(RuntimeException e){
+          System.out.println(e);
+        }
+        
+      }
+
     public static void main(String[] args) {
-        Cafe myCafe = new Cafe("Compass Cafe", "Neilson Library", 1, 12, 4, 4, 2);
+        Cafe myCafe = new Cafe("Compass Cafe", "Neilson Library", 1, 12, 4, 4, 2, false);
         myCafe.sellCoffee(12, 2, 2);
         myCafe.sellCoffee(16, 4, 4);
         myCafe.sellCoffee(12, 2, 2);

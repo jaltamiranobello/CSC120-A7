@@ -2,9 +2,10 @@ import java.util.Hashtable;
 
 public class Library extends Building {
     private Hashtable <String, Boolean> collection;
+    private boolean hasElevator;
 
     /* This is a constructor for the Library class */
-    public Library(String name, String address, int nFloors) {
+    public Library(String name, String address, int nFloors, boolean hasElevator) {
       super(name, address, nFloors);
       this.collection = new Hashtable <String, Boolean> ();
     }
@@ -12,6 +13,11 @@ public class Library extends Building {
     /** Accessor for collection */
     public Hashtable <String, Boolean> getCollection(){
       return this.collection;
+    }
+
+    /** Accessor for hasElevator */
+    public boolean hasElevator() {
+      return this.hasElevator();
     }
 
   /**
@@ -136,10 +142,26 @@ public class Library extends Building {
       System.out.println(this.collection.toString());
     } 
 
+    public void showOptions() {
+      System.out.println("Available options at " + this.name + ":\n + enter() \n + exit() \n + goUp() \n + goDown()\n + goToFloor(n) \n + addTitle() \n + removeTitle() \n + checkOut() \n + returnBook() \n + containsTitle() \n + isAvailable() \n + printCollection()");
+  }
+
+    public void goToFloor(int floorNum) {
+      try{
+        if (this.hasElevator == false){
+          throw new RuntimeException("Sorry, there is no elevator.");
+        }
+        super.goToFloor(floorNum);
+      }
+      catch(RuntimeException e){
+        System.out.println(e);
+      }
+    } 
+
 
 
     public static void main(String[] args) {
-      Library neilson = new Library("Neilson", "7 Smith St", 4);
+      Library neilson = new Library("Neilson", "7 Smith St", 4, true);
       neilson.addTitle("The Cat in The Hat By Dr. Seuss");
       System.out.println(neilson);
       neilson.printCollection();
