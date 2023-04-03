@@ -69,14 +69,13 @@ public class Cafe extends Building {
 
     /* This is an overloaded method for sellCoffee if the person orders an americano */
     public void sellCoffee(int size){
-        this.nCreams = 0;
-        this.nSugarPackets = 0;
         try{
             if (this.nCoffeeOunces <= size -1 | this.nCups == 0){
                 throw new RuntimeException("Sorry we don't have enough inventory to make the coffee. Please give us a moment and try again!");
             }
             this.nCoffeeOunces -= size;
             this.nCups -= 1;
+            System.out.println("Thank you for your purchase!");
         }
         catch(RuntimeException e){
             System.out.println(e);
@@ -133,8 +132,8 @@ public class Cafe extends Building {
     public static void main(String[] args) {
         Cafe myCafe = new Cafe("Compass Cafe", "Neilson Library", 1, 12, 4, 4, 2, false);
         myCafe.sellCoffee(12, 2, 2);
-        myCafe.sellCoffee(16, 4, 4);
-        myCafe.sellCoffee(12, 2, 2);
+        myCafe.sellCoffee(16, 4, 4);    
+        myCafe.sellCoffee(2);
     }
     
 }
