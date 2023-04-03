@@ -36,6 +36,12 @@ public class Library extends Building {
         }
     }
 
+  /* This is an overloaded method for addTitle in the case that the title given is an int */
+    public void addTitle(int title_num){
+      String title = String.valueOf(title_num);
+      this.addTitle(title);
+    }
+
   /**
    * This checks if a book is in a collection and if it is, it gets removed
    * @param String title
@@ -51,6 +57,13 @@ public class Library extends Building {
       catch(RuntimeException e) {
         System.out.println(e);
       }
+      return title;
+    }
+
+    /* This is an overloaded method for removeTitle in the case that the title given is an int */
+    public String removeTitle(int title_num){
+      String title = String.valueOf(title_num);
+      this.removeTitle(title);
       return title;
     }
 
@@ -72,6 +85,12 @@ public class Library extends Building {
         catch(RuntimeException e) {
           System.out.println(e);
         }
+      }
+
+    /* This is an overloaded method for checkOut in the case that the title given is an int */
+      public void checkOut(int title_num){
+        String title = String.valueOf(title_num);
+        this.checkOut(title);
       }
 
   /**
@@ -96,6 +115,12 @@ public class Library extends Building {
   
     }
 
+    /* This is an overloaded method for returnBook in the case that the title given is an int */
+    public void returnBook(int title_num){
+      String title = String.valueOf(title_num);
+      this.returnBook(title);
+    }
+
   /**
    * This checks if a book is in a collection
    * @param String title
@@ -111,6 +136,12 @@ public class Library extends Building {
       
     }
 
+    /* This is an overloaded method for containsTitle in the case that the title given is an int */
+    public boolean containsTitle(int title_num){
+      String title = String.valueOf(title_num);
+      return this.containsTitle(title);
+    }
+
   /**
    * This checks if a book is available
    * @param String title
@@ -123,6 +154,12 @@ public class Library extends Building {
       else{
         return false;
       }
+    }
+
+    /* This is an overloaded method for isAvailable in the case that the title given is an int */
+    public boolean isAvailable(int title_num){
+      String title = String.valueOf(title_num);
+      return this.isAvailable(title);
     }
 
   /**
@@ -157,8 +194,6 @@ public class Library extends Building {
         System.out.println(e);
       }
     } 
-
-
 
     public static void main(String[] args) {
       Library neilson = new Library("Neilson", "7 Smith St", 4, true);

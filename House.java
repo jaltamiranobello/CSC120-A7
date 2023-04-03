@@ -6,12 +6,27 @@ public class House extends Building {
   private boolean hasDiningRoom;
   private boolean hasElevator;
 
-  /* This is a constructor for the House class */
+  /* This is a full constructor for the House class */
   public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = hasDiningRoom;
     this.hasElevator= hasElevator;
+  }
+  /* This is an overloaded constructor for the House class w/ name, adress, and nFloors */
+  public House (String name, String address, int nFloors){
+    super(name, address, nFloors);
+    this.residents = new ArrayList<String>();
+    this.hasDiningRoom = false;
+    this.hasElevator = false;
+  }
+
+  /* This is an overloaded constructor for the House class w/ name and address */
+  public House (String name, String address){
+    super(name, address);
+    this.residents = new ArrayList<String>();
+    this.hasDiningRoom = false;
+    this.hasElevator = false;
   }
 
   /** Accessor for hasDiningRoom */
@@ -100,6 +115,13 @@ public class House extends Building {
       description += "does not have";
     }
     description += " an active dining room.";
+    description += " This house ";
+    if (this.hasElevator){
+      description += "has";
+    } else{
+      description += "does not have";
+    }
+    description += " an elevator.";
     return description;
   }
 
@@ -121,8 +143,8 @@ public void goToFloor(int floorNum) {
 }
 
   public static void main(String[] args) {
-    House wilson = new House("Wilson", "16 Kensington Ave", 4, false, false);
-    System.out.println(wilson);
+    House wilson = new House("Wilson", "16 Kensington Ave", 4);
+    System.out.println(wilson.hasDiningRoom);
     wilson.moveIn("Julie");
     wilson.moveIn("Julie");
     wilson.moveIn("Taylor");

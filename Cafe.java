@@ -6,6 +6,7 @@ public class Cafe extends Building {
     private int nCups;
     private boolean hasElevator;
 
+
     /* This is a constructor for the Cafe class */
     public Cafe(String name, String address, int nFloors, int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups, boolean hasElevator) {
         super(name, address, nFloors);
@@ -40,6 +41,7 @@ public class Cafe extends Building {
     public boolean hasElevator() {
         return this.hasElevator();
     }
+
     
   /**
    * This checks if there is enough inventory to make a coffee, if there is a coffee is sold
@@ -61,9 +63,27 @@ public class Cafe extends Building {
         }
          catch(RuntimeException e){
             System.out.println(e);
-            this.restock(size, nSugarPackets, nCreams, 1);
+            this.restock(size, nSugarPackets, nCreams, nCups);
          }
     }
+
+    /* This is an overloaded method for sellCoffee if the person orders an americano */
+    public void sellCoffee(int size){
+        this.nCreams = 0;
+        this.nSugarPackets = 0;
+        try{
+            if (this.nCoffeeOunces <= size -1 | this.nCups == 0){
+                throw new RuntimeException("Sorry we don't have enough inventory to make the coffee. Please give us a moment and try again!");
+            }
+            this.nCoffeeOunces -= size;
+            this.nCups -= 1;
+        }
+        catch(RuntimeException e){
+            System.out.println(e);
+            this.restock(size);
+        }
+    }
+
 
   /**
    * This checks what items are running low and restocks them to have enough to make the coffee that was just ordered
@@ -74,18 +94,23 @@ public class Cafe extends Building {
    */ 
     private void restock(int nCoffeeOunces, int nSugarPackets, int nCreams, int nCups){
         if (this.nCoffeeOunces < nCoffeeOunces){
-            this.nCoffeeOunces = nCoffeeOunces;
+            this.nCoffeeOunces = nCoffeeOunces + 50;
         }
         if(this.nSugarPackets < nSugarPackets){
-            this.nSugarPackets = nSugarPackets;
+            this.nSugarPackets = nSugarPackets + 30 ;
         }
         if (this.nCreams < nCreams){
-            this.nCreams = nCreams;
+            this.nCreams = nCreams + 30;
         }
-        if (this.nCups < nCups){
-            this.nCups = nCups;
+        if (this.nCups == 0){
+            this.nCups = nCups + 50;
         }
 
+    }
+
+    /* This is an overloaded method for restock if the person orders an americano and there isn't enough coffee to make it so no need to restock cream and sugar */
+    private void restock(int nCoffeeOunces){
+        this.nCoffeeOunces = nCoffeeOunces + 50;
     }
 
     public void showOptions() {
