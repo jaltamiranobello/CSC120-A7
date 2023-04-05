@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 
 public class CampusMap {
-
     ArrayList<Building> buildings;
 
     /* Default constructor, initializes empty ArrayList */
@@ -65,11 +64,13 @@ public class CampusMap {
         myMap.addBuilding(hillyer);
         myMap.addBuilding(josten);
         System.out.println(myMap);
+        System.out.println();
 
         
-        //for(Building b: buildings){
-       //     b.showOptions();
-       // }
+        for(Building b: myMap.buildings){
+            b.showOptions();
+        }
+
 
     }
     
