@@ -39,7 +39,7 @@ public class Cafe extends Building {
 
     /** Accessor for hasElevator */
     public boolean hasElevator() {
-        return this.hasElevator();
+        return this.hasElevator;
     }
 
     
@@ -118,15 +118,11 @@ public class Cafe extends Building {
 
     public void goToFloor(int floorNum) {
         try{
-          if (this.hasElevator == false){
-            throw new RuntimeException("Sorry, there is no elevator.");
-          }
-          super.goToFloor(floorNum);
+            throw new RuntimeException("Sorry, you do not have access to this floor. Employees Only!");
         }
-        catch(RuntimeException e){
-          System.out.println(e);
-        }
-        
+            catch(RuntimeException e){
+            System.out.println(e);
+            }
       }
 
     public static void main(String[] args) {
