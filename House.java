@@ -5,6 +5,7 @@ public class House extends Building {
   private ArrayList<String> residents;
   private boolean hasDiningRoom;
   private boolean hasElevator;
+  private boolean hasKitchen;
 
   /* This is a full constructor for the House class */
   public House(String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator) {
@@ -12,21 +13,25 @@ public class House extends Building {
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = hasDiningRoom;
     this.hasElevator= hasElevator;
+    this.hasKitchen = false;
   }
+
   /* This is an overloaded constructor for the House class w/ name, adress, and nFloors */
   public House (String name, String address, int nFloors){
     super(name, address, nFloors);
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = false;
     this.hasElevator = false;
+    this.hasKitchen = false;
   }
 
-  /* This is an overloaded constructor for the House class w/ name and address */
-  public House (String name, String address){
-    super(name, address);
+  /* This is an overloaded constructor for a House class when the status of a kitchen is given*/
+  public House (String name, String address, int nFloors, boolean hasDiningRoom, boolean hasElevator, boolean hasKitchen){
+    super(name, address, nFloors);
     this.residents = new ArrayList<String>();
     this.hasDiningRoom = false;
     this.hasElevator = false;
+    this.hasKitchen = hasKitchen;
   }
 
   /** Accessor for hasDiningRoom */
@@ -41,7 +46,12 @@ public class House extends Building {
 
     /** Accessor for hasElevator */
     public boolean hasElevator() {
-      return this.hasElevator();
+      return this.hasElevator;
+    }
+
+    /** Accessor for hasKitchen */
+    public boolean hasKitchen() {
+      return this.hasKitchen;
     }
 
   /**
@@ -122,6 +132,13 @@ public class House extends Building {
       description += "does not have";
     }
     description += " an elevator.";
+    description += " This house ";
+    if (this.hasKitchen){
+      description += "has";
+    } else{
+      description += "does not have";
+    }
+    description += " a kitchen.";
     return description;
   }
 
@@ -143,7 +160,7 @@ public void goToFloor(int floorNum) {
 }
 
   public static void main(String[] args) {
-    House wilson = new House("Wilson", "16 Kensington Ave", 4);
+    House wilson = new House("Wilson", "16 Kensington Ave", 4, false, false, true);
     System.out.println(wilson.hasDiningRoom);
     wilson.moveIn("Julie");
     wilson.moveIn("Julie");
@@ -159,6 +176,7 @@ public void goToFloor(int floorNum) {
     wilson.goToFloor(2);
     scales.enter();
     scales.goToFloor(2);
+    
   }
 
 }

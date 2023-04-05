@@ -85,7 +85,7 @@ public class Cafe extends Building {
 
 
   /**
-   * This checks what items are running low and restocks them to have enough to make the coffee that was just ordered
+   * This checks what items are running low and restocks them to a specific amount
    * @param1 int nCoffeeOunces
    * @param2 int nSugarPackets
    * @param3 int nCreams
